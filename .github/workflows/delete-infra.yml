@@ -1,0 +1,12 @@
+# sam delete --stack-name cloud-resume-api
+name: Output information
+on: workflow_dispatch
+jobs:
+  info:
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - name: Output GitHub context
+        run: echo "${{ toJSON(github) }}"
+      - name: Output prod vars
+        run: echo "${{ toJSON(vars) }}"
