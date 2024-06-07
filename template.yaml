@@ -17,6 +17,9 @@ Resources:
       CodeUri: hello-world/
       Handler: app.lambdaHandler
       Runtime: nodejs18.x
+      Policies:
+      # Give your Lambda full access to DynamoDB
+      - AmazonDynamoDBFullAccess
       Architectures:
         - x86_64
       Events:
@@ -25,6 +28,19 @@ Resources:
           Properties:
             Path: /hello
             Method: get
+  CloudResumeTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey: name
+      TableName: cloudresume-table
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+        
+
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
