@@ -11,10 +11,10 @@ Globals:
     Timeout: 3
 
 Resources:
-  CloudResumeFunction:
+  HelloWorldFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: cloud-resume/
+      CodeUri: hello-world/
       Handler: app.lambdaHandler
       Runtime: nodejs18.x
       Policies:
@@ -23,10 +23,10 @@ Resources:
       Architectures:
         - x86_64
       Events:
-        CloudResume:
+        HelloWorld:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /counter
+            Path: /hello
             Method: get
   CloudResumeTable:
     Type: AWS::Serverless::SimpleTable
@@ -42,12 +42,12 @@ Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  CloudResumeApi:
-    Description: "API Gateway endpoint URL for Prod stage for Cloud Resume function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/counter/"
-  CloudResumeFunction:
-    Description: "CloudResume Lambda Function ARN"
-    Value: !GetAtt CloudResumeFunction.Arn
-  CloudResumeFunctionIamRole:
-    Description: "Implicit IAM Role created for Cloud Resume function"
-    Value: !GetAtt CloudResumeFunctionRole.Arn
+  HelloWorldApi:
+    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+  HelloWorldFunction:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt HelloWorldFunction.Arn
+  HelloWorldFunctionIamRole:
+    Description: "Implicit IAM Role created for Hello World function"
+    Value: !GetAtt HelloWorldFunctionRole.Arn
